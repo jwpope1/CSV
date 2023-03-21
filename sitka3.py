@@ -25,3 +25,26 @@ for row in csvfile:
 print(highs)
 print(lows)
 print(dates)
+
+import matplotlib.pyplot as plt
+
+figure = plt.figure()
+
+plt.plot(dates, highs, c="red", alpha=0.5)
+plt.plot(dates, lows, c="blue", alpha=0.5)
+
+plt.title("Daily and low high temperatures- 2018", fontsize=16)
+plt.xlabel("", fontsize=12)
+plt.ylabel("Temperature(F)", fontsize=16)
+plt.tick_params(axis="both", which="major", labelsize=16)
+plt.fill_between(dates, lows, highs, facecolor="turquoise", alpha=0.1)
+
+figure.autofmt_xdate()
+
+plt.subplot(2, 1, 1)  # means 2 rows, 1 column, first graph
+plt.plot(dates, highs, c="red")
+plt.title("Lows")
+
+plt.suptitle("Highs and Lows of Sitka, Alaska")
+
+plt.show()
