@@ -92,5 +92,7 @@ plt.title(sitka_title, fontsize=14)
 # utility wrapper and helps in creating common layouts of subplots, including the
 # enclosing figure object, in a single call
 
+maintitle = "Comparison of " + death_title + " and " + sitka_title
+plt.suptitle(maintitle, fontsize=18)
 
 plt.show()
