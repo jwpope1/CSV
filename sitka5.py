@@ -1,5 +1,5 @@
 import csv
-import matplotlib as plt
+import matplotlib.pyplot as plt
 from datetime import datetime
 
 death_infile = open("death_valley_2018_simple.csv", "r")
@@ -54,7 +54,7 @@ for row in death_csvfile:
     try:
         high = int(row[death_max_index])
         low = int(row[death_min_index])
-        currentdate = datetime.strptime(row[death_date_index])
+        currentdate = datetime.strptime(row[death_date_index], "%Y-%m-%d")
     except ValueError:
         print(f"There is data missing for {currentdate}. Please look into fixing this.")
     else:
@@ -67,7 +67,7 @@ for row in sitka_csvfile:
     try:
         high = int(row[sitka_max_index])
         low = int(row[sitka_min_index])
-        currentdate = datetime.strptime(row[sitka_date_index])
+        currentdate = datetime.strptime(row[sitka_date_index], "%Y-%m-%d")
     except ValueError:
         print(f"There is data missing for {currentdate}. Please look into fixing this.")
     else:
@@ -76,8 +76,21 @@ for row in sitka_csvfile:
         sitka_dates.append(currentdate)
 
 # create 2 subplot graphs in one visualization so you can see both graphs to compare side by side.
+plt.subplot(2, 1, 2)
+plt.plot(death_dates, death_highs, c="red")
+plt.plot(death_dates, death_lows, c="red")
+plt.fill_between(death_dates, death_highs, death_lows, facecolor="green", alpha=0.1)
+plt.title(death_title, fontsize=14)
 
+plt.subplot(2, 1, 1)
+plt.plot(sitka_dates, sitka_highs, c="red")
+plt.plot(sitka_dates, sitka_lows, c="red")
+plt.fill_between(sitka_dates, sitka_highs, sitka_lows, facecolor="green", alpha=0.1)
+plt.title(sitka_title, fontsize=14)
 
 # Matplotlib's pyplot API has a convenience function called subplots() which acts as a
 # utility wrapper and helps in creating common layouts of subplots, including the
 # enclosing figure object, in a single call
+
+
+plt.show()
