@@ -60,10 +60,20 @@ for row in death_csvfile:
     else:
         death_highs.append(high)
         death_lows.append(low)
+        death_dates.append(currentdate)
 
 for row in sitka_csvfile:
-    highs.append(int(row[5]))  #
-    lows.append(int(row[6]))
+    sitka_title = row[sitka_name_index]
+    try:
+        high = int(row[sitka_max_index])
+        low = int(row[sitka_min_index])
+        currentdate = datetime.strptime(row[sitka_date_index])
+    except ValueError:
+        print(f"There is data missing for {currentdate}. Please look into fixing this.")
+    else:
+        sitka_highs.append(high)
+        sitka_lows.append(low)
+        sitka_dates.append(currentdate)
 
 # create 2 subplot graphs in one visualization so you can see both graphs to compare side by side.
 
