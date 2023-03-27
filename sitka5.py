@@ -1,26 +1,37 @@
 import csv
+import matplotlib as plt
 from datetime import datetime
 
-infile = open("death_valley_2018_simple.csv", "r")
+death_infile = open("death_valley_2018_simple.csv", "r")
+sitka_infile = open("sitka_weather_2018_simple.csv", "r")
 
-csvfile = csv.reader(infile)
+death_csvfile = csv.reader(death_infile, delimiter=",")
+sitka_csvfile = csv.reader(sitka_infile, delimiter=",")
 
-header_row = next(csvfile)  # eliminates the first line
+death_header_row = next(death_csvfile)  # eliminates the first line
+sitka_header_row = next(sitka_csvfile)
 
 print(type(header_row))
 
 for index, column_header in enumerate(header_row):
     print(index, column_header)
 
-highs = []  # y axis
-lows = []
-dates = []  # x axis
+death_highs = []  # y axis
+death_lows = []
+death_dates = []  # x axis
+sitka_highs = []  # y axis
+sitka_lows = []
+sitka_dates = []  # x axis
 
 
 # Automatic Indexes: We hard coded the indexes corresponding to the TMIN and TMAX
 # columns. Use the header row to determine the indexes for these values, so your program can work
 # for Sitka or Death Valley. Use the station name to automatically generate an appropriate title
 # for your graph as well.
+
+for row in csvfile:
+    highs.append(int(row[5]))  #
+    lows.append(int(row[6]))
 
 
 # create 2 subplot graphs in one visualization so you can see both graphs to compare side by side.
