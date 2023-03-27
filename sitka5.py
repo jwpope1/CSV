@@ -49,10 +49,21 @@ for index, column_header in enumerate(sitka_header_row):
         sitka_name_index = index
 
 
-for row in csvfile:
+for row in death_csvfile:
+    death_title = row[death_name_index]
+    try:
+        high = int(row[death_max_index])
+        low = int(row[death_min_index])
+        currentdate = datetime.strptime(row[death_date_index])
+    except ValueError:
+        print(f"There is data missing for {currentdate}. Please look into fixing this.")
+    else:
+        death_highs.append(high)
+        death_lows.append(low)
+
+for row in sitka_csvfile:
     highs.append(int(row[5]))  #
     lows.append(int(row[6]))
-
 
 # create 2 subplot graphs in one visualization so you can see both graphs to compare side by side.
 
